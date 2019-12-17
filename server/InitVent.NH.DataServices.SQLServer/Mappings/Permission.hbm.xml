@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="InitVent.NH.DataServices" namespace="InitVent.DataServices.Domain">
+  <class name="Permission" table="Permission">
+    <id name="Id" column="id" generator="assigned" />
+    <property name="PermissionName" column="name" not-null="true" />
+    <property name="SerialNo" column="slNo" not-null="false" />
+    <property name="ItemId" column="item_id" not-null="false" />
+    <property name="Code" column="code" not-null="false" />
+    <property name="ActionName" column="actionName" not-null="false" />
+  </class>
+</hibernate-mapping>

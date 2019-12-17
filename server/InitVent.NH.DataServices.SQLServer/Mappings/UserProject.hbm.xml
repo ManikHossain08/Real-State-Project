@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="InitVent.NH.DataServices" namespace="InitVent.DataServices.Domain">
+  <class name="UserProject" table="User_Project">
+    <id name="Id" column="id" generator="assigned" />
+    <property name="UserId" column="user_id" not-null="true" />
+    <property name="ProjectId" column="project_id" not-null="true"/>
+  </class>
+</hibernate-mapping>
+

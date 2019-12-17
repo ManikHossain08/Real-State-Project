@@ -1,0 +1,9 @@
+E:\Development\ITNEW\server\Logger\bin\Debug\log4net.xml
+E:\Development\ITNEW\server\Logger\bin\Debug\iMFAS.Services.Logger.dll
+E:\Development\ITNEW\server\Logger\bin\Debug\iMFAS.Services.Logger.pdb
+E:\Development\ITNEW\server\Logger\bin\Debug\InitVent.Common.dll
+E:\Development\ITNEW\server\Logger\bin\Debug\log4net.dll
+E:\Development\ITNEW\server\Logger\bin\Debug\InitVent.Common.pdb
+E:\Development\ITNEW\server\Logger\obj\Debug\Logger.csprojResolveAssemblyReference.cache
+E:\Development\ITNEW\server\Logger\obj\Debug\iMFAS.Services.Logger.dll
+E:\Development\ITNEW\server\Logger\obj\Debug\iMFAS.Services.Logger.pdb

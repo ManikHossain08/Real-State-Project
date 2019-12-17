@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>System.Net.Http.Formatting</id>
+    <version>4.0.20126.16343</version>
+    <title>System.Net.Http.Formatting (Beta)</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/aspnetmvc4-beta-eula.htm</licenseUrl>
+    <projectUrl>http://www.asp.net/web-api</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>This package adds support for formatting and content negotiation to System.Net.Http. It includes support for JSON, XML, and form URL encoded data.</description>
+    <dependencies>
+      <dependency id="System.Json" version="4.0.20126.16343" />
+      <dependency id="System.Net.Http" version="2.0.20126.16343" />
+    </dependencies>
+  </metadata>
+</package>

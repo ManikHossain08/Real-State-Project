@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Sentrana.Services.Logger.LoggerService&lt;T&gt;">
+    <Position X="2.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LoggerService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sentrana.Services.Logger.LogMessage">
+    <Position X="4.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAIAAABAAAAAABA=</HashCode>
+      <FileName>LoggerService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sentrana.Services.Logger.JSONLayout">
+    <Position X="4.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAACgIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>JSONLayout.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Sentrana.Services.Logger.EnumLogLevel">
+    <Position X="2.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAYAAAAAAAAAAAAAAAAEAAAAAAEAEAAA=</HashCode>
+      <FileName>EnumLogLevel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

@@ -1,0 +1,354 @@
+﻿@{
+    ViewBag.Title = "Real Estate Search";
+    //ViewBag.Title = "Mitechdev.com";
+}
+<style>
+    #map {
+        float: left;
+        width: 94.2%;
+        height: 60%;
+        position: absolute;
+        margin-left: -2.9%;
+        margin-top: 9.2%;
+    }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: rgb(10, 10, 92);
+    }
+
+    .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    #type-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+    }
+
+    #type-selector label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+    #target {
+        width: 345px;
+    }
+
+    #right-panel {
+        width: 34%;
+        height: 100%;
+        margin-right: -11em;
+    }
+
+    #Address {
+        width: 16.8em;
+    }
+
+    #mydiv {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+        background-color: grey;
+        opacity: .8;
+    }
+
+    .ajax-loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -32px;
+        margin-top: -32px;
+        display: block;
+    }
+
+    #right-panel {
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+    }
+
+    #right-panel i {
+            font-size: 12px;
+        }
+
+    #right-panel {
+        width: 34%;
+        height: 100%;
+    }
+
+    #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 20%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+        margin-top: 4%;
+        margin-left: -17.5%;
+        width: 94.2%;
+        height: 4em;
+        background: #94bf94;
+    }
+
+    .panel {
+        height: 100%;
+        overflow: auto;
+    }
+
+    #searchDataInfoTable {
+        width: 85.8em !important;
+        margin-left: -17.5%;
+        /*width: 94.2%;*/
+        background-color: white;
+    }
+
+    #missListTableInfo {
+        width: 85.8em !important;
+        margin-top: -3%;
+        margin-left: -17.5%;
+        /*width: 94.2%;*/
+        background-color: white;
+    }
+
+    #spanOfMislist {
+        color: white;
+        font-size: 1.2em;
+        margin-left: -17%;
+        margin-top: -1em;
+    }
+
+    #distances {
+        margin-left: -1.5em;
+    }
+
+    #Distance, #Price, #noOfBedroom, #travelType, #objectType {
+        width: 9.8em !important;
+        height: 2em !important;
+    }
+
+    #gobutton {
+        width: 3.2em;
+    }
+
+    #caption {
+        margin-top: 58px !important;
+        margin-bottom: -27px !important;
+    }
+
+    #travelType, #objectType {
+        height: 2em !important;
+    }
+
+    #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 27% !important;
+    }
+
+    #pac-input:focus {
+            border-color: #4d90fe;
+        }
+</style>
+<div id="appendBox">
+    <input id="pac-input" class="controls" type="text" placeholder="Search location to placed rectangle ....">
+</div>
+<div id="mapAndSearchBox">
+    <div id="map"></div>
+    <div id="floating-panel">
+        <strong class="error">{{ error }}</strong>
+        <input id="Price" ng-model="Price" placeholder="Max Price">
+        <input id="noOfBedroom" ng-model="noOfBedroom" placeholder="No Of Bedrooms">
+        <input id="Distance" ng-model="Distance" placeholder="Distance in KM">
+
+        <select id="objectType">
+            <option value="Beach">Beach</option>
+            <option value="Park">Park</option>
+            <option value="School">School</option>
+            <option value="Shopping Center">Shopping Center</option>
+            <option value="Picnic Spot">Picnic Spot</option>
+        </select>
+
+        <select name="travelType" id="travelType">
+            <option value="DRIVING">DRIVING</option>
+            <option value="WALKING">WALKING</option>
+            <option value="BICYCLING">BICYCLING</option>
+        </select>
+        <input value="Go" ng-click="PopulateSearchData()" onclick="callControllerFunction()" class=" btn btn-primary" id="gobutton" />
+    </div>
+</div>
+
+<div id="right-panel">
+    <div data-ng-controller="customerController" class="container" id="searchMapByRectangle">
+        <div class="row">
+            <div class="col-md-12">
+                <br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" id="searchDataInfoTable">
+                        <tr>
+                            <th>#</th>
+                            <th>Sales Object</th> 
+                            <th>Zip</th>
+                            @*<th>Map Object</th>*@
+                            <th>Rooms</th>
+                            <th>price</th>
+                            <th>Distance</th>
+                            <th>Time</th>
+                            <th>Size</th>
+                            <th>Pets Allowed</th>
+                        </tr>
+                        <tr data-ng-repeat="customer in customers">
+                            <td><strong data-ng-hide="customer.editMode">{{ $index + 1 }}</strong></td>
+                            <td>
+                                <a ng-href="{{customer.lift}}" target="_blank" title="Clik to go to the link - {{customer.lift}}">{{customer.nameOfObject}}</a>
+                                @*<p data-ng-hide="customer.editMode">{{ customer.lift }}</p>*@
+                                <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.lift" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="customer.editMode">{{ customer.floor }}</p>
+                                <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.floor" />
+                            </td>
+                            @*<td>
+                                <p data-ng-hide="customer.editMode">{{ customer.mapObjName }}</p>
+                                <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.Address" />
+                            </td>*@
+                            <td>
+                                <p data-ng-hide="customer.editMode">{{ customer.numberOfBedrooms }}</p>
+                                <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.numberOfBedrooms" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="customer.editMode">{{ customer.price }}</p>
+                                <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.price" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="customer.editMode">{{ customer.distanceInKM }}</p>
+                                <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.Country" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="customer.editMode">{{ customer.timeInMins }}</p>
+                                <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.timeInMins" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="customer.editMode">{{ customer.size }}</p>
+                                <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.size" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="customer.editMode">{{ customer.petsAllowed }}</p>
+                                <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.petsAllowed" />
+                            </td>
+                           
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <p id="spanOfMislist">Near-Miss List :</p>
+                    <table class="table table-bordered table-hover" id="missListTableInfo">
+                        <tr>
+                            <th>#</th>
+                            <th>Sales Object</th>
+                            <th>Zip</th>
+                            @*<th>Map Object</th>*@
+                            <th>Rooms</th>
+                            <th>price</th>
+                            <th>Distance</th>
+                            <th>Time</th>
+                            <th>Size</th>
+                            <th>Pets Allowed</th>
+                           
+                        </tr>
+                        <tr data-ng-repeat="searchMissObj in missList">
+                            <td><strong data-ng-hide="searchMissObj.editMode">{{ $index + 1 }}</strong></td>
+                            <td>
+                                <a ng-href="{{searchMissObj.lift}}" target="_blank" title="Clik to go to the link - {{searchMissObj.lift}}">{{searchMissObj.nameOfObject}}</a>
+                                @*<p data-ng-hide="searchMissObj.editMode">{{ searchMissObj.lift }}</p>*@
+                                <input data-ng-show="searchMissObj.editMode" type="text" data-ng-model="searchMissObj.lift" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="searchMissObj.editMode">{{ searchMissObj.floor }}</p>
+                                <input data-ng-show="searchMissObj.editMode" type="text" data-ng-model="searchMissObj.floor" />
+                            </td>
+                            
+                            @*<td>
+                                <p data-ng-hide="searchMissObj.editMode">{{ searchMissObj.mapObjName }}</p>
+                                <input data-ng-show="searchMissObj.editMode" type="text" data-ng-model="searchMissObj.Address" />
+                            </td>*@
+                            <td>
+                                <p data-ng-hide="searchMissObj.editMode">{{ searchMissObj.numberOfBedrooms }}</p>
+                                <input data-ng-show="searchMissObj.editMode" type="text" data-ng-model="searchMissObj.numberOfBedrooms" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="searchMissObj.editMode">{{ searchMissObj.price }}</p>
+                                <input data-ng-show="searchMissObj.editMode" type="text" data-ng-model="searchMissObj.price" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="searchMissObj.editMode">{{ searchMissObj.distanceInKM }}</p>
+                                <input data-ng-show="searchMissObj.editMode" type="text" data-ng-model="searchMissObj.Country" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="searchMissObj.editMode">{{ searchMissObj.timeInMins }}</p>
+                                <input data-ng-show="searchMissObj.editMode" type="text" data-ng-model="searchMissObj.timeInMins" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="searchMissObj.editMode">{{ searchMissObj.size }}</p>
+                                <input data-ng-show="searchMissObj.editMode" type="text" data-ng-model="searchMissObj.size" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="searchMissObj.editMode">{{ searchMissObj.petsAllowed }}</p>
+                                <input data-ng-show="searchMissObj.editMode" type="text" data-ng-model="searchMissObj.petsAllowed" />
+                            </td>
+                            
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="mydiv" data-ng-show="loading">
+            @*<img src="Images/ajax-loader.gif" class="ajax-loader" />*@
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/JSController/searchMap.js"> </script>
+    <script type="text/javascript" src="~/Scripts/jquery.blockUI.js"></script>
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_ZldrgQ9hwk-7N5EIL9W8Drjvy5ekNZg&libraries=drawing&libraries=places&callback=initMap"
+            async defer></script>*@
+    <script src="~/Scripts/API/googleMapCallbackinitMap.js"
+        async defer></script>
+
+    @*<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_ZldrgQ9hwk-7N5EIL9W8Drjvy5ekNZg&callback=initMap">
+        </script>*@
+}

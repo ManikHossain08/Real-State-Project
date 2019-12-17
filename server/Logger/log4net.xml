@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<log4net>
+  <level>
+    <name value="INIT" />
+    <value value="200000" />
+  </level>
+  <level>
+    <name value="CACHE" />
+    <value value="210000" />
+  </level>
+  <level>
+    <name value="SQL" />
+    <value value="220000" />
+  </level>
+  
+  <root>
+    <level value="DEBUG" />
+    <appender-ref ref="TextLogFileAppender" />
+    <appender-ref ref="TextLogFileAppenderForInit" />
+    <appender-ref ref="TextLogFileAppenderForCache" />
+    <appender-ref ref="TextLogFileAppenderForSQL" />
+  </root>
+
+  <appender name="TextLogFileAppender" type="log4net.Appender.RollingFileAppender" >
+    <file type="log4net.Util.PatternString" value="Logs\iMFASLog.txt" />
+    <appendToFile value="true" />
+    <rollingStyle value="Size" />
+    <maxSizeRollBackups value="10" />
+    <maximumFileSize value="10MB" />
+    <staticLogFileName value="true" />
+    <layout type="log4net.Layout.PatternLayout">
+      <param name="ConversionPattern" value="%-5p %d{yyyy-MM-dd HH:mm:ss fff} [%logger] – %m%n%exception" />
+    </layout>
+    <filter type="log4net.Filter.LevelRangeFilter">
+      <levelMax value="FATAL" />
+    </filter>
+  </appender>
+  <appender name="TextLogFileAppenderForInit" type="log4net.Appender.RollingFileAppender" >
+    <filter type="log4net.Filter.LevelMatchFilter">
+      <levelToMatch value="INIT" />
+    </filter>
+    <filter type="log4net.Filter.DenyAllFilter" />
+    <file type="log4net.Util.PatternString" value="Logs\iMFASLog-Init.txt" />
+    <appendToFile value="true" />
+    <rollingStyle value="Size" />
+    <maxSizeRollBackups value="10" />
+    <maximumFileSize value="10MB" />
+    <staticLogFileName value="true" />
+    <layout type="log4net.Layout.PatternLayout">
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss fff} [%logger] - %m%n%exception" />
+    </layout>
+  </appender>
+  <appender name="TextLogFileAppenderForCache" type="log4net.Appender.RollingFileAppender" >
+    <filter type="log4net.Filter.LevelMatchFilter">
+      <levelToMatch value="CACHE" />
+    </filter>
+    <filter type="log4net.Filter.DenyAllFilter" />
+    <file type="log4net.Util.PatternString" value="Logs\iMFASLog-Cache.csv" />
+    <appendToFile value="true" />
+    <rollingStyle value="Size" />
+    <maxSizeRollBackups value="10" />
+    <maximumFileSize value="10MB" />
+    <staticLogFileName value="true" />
+    <layout type="log4net.Layout.PatternLayout">
+      <param name="Header" value="DateTime,Duration,Status,CacheKey&#13;"/>
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss},%m%n" />
+    </layout>
+  </appender>
+  <appender name="TextLogFileAppenderForSQL" type="log4net.Appender.RollingFileAppender" >
+    <filter type="log4net.Filter.LevelMatchFilter">
+      <levelToMatch value="SQL" />
+    </filter>
+    <filter type="log4net.Filter.DenyAllFilter" />
+    <file type="log4net.Util.PatternString" value="Logs\iMFASLog-Sql.csv" />
+    <appendToFile value="true" />
+    <rollingStyle value="Size" />
+    <maxSizeRollBackups value="10" />
+    <maximumFileSize value="10MB" />
+    <staticLogFileName value="true" />
+    <layout type="log4net.Layout.PatternLayout">
+      <param name="Header" value="DateTime,Duration,Status,RowCount,CacheKey,Query&#13;"/>
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss},%m%n" />
+    </layout>
+  </appender>
+  
+</log4net>

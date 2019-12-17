@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="InitVent.NH.DataServices" namespace="InitVent.DataServices.Domain">
+  <class name="Role" table="role">
+    <id name="Id" column="id" generator="assigned" />
+    <property name="RoleName" column="name" not-null="true" />
+    <property name="RoleDescription" column="description" not-null="true" />
+    <property name="Status" column="status" not-null="true" />   
+  </class>
+</hibernate-mapping>

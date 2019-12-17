@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "Google Map Project.com";
+    //ViewBag.Title = "Mitechdev.com";
+}
+
+<style>
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+        height: 100%;
+        float: left;
+        width: 75%;
+        height: 90%;
+        /*position: absolute;*/
+        margin-left: -4em;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    /*html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }*/
+
+    .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 300px;
+    }
+
+        #pac-input:focus {
+            border-color: #4d90fe;
+        }
+
+    .pac-container {
+        font-family: Roboto;
+    }
+
+    #type-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+    }
+
+        #type-selector label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+    #target {
+        width: 345px;
+    }
+
+    #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+        MARGIN-TOP: 7EM;
+        MARGIN-LEFT: 20EM;
+    }
+
+    #right-panel {
+        float: right;
+        width: 34%;
+        height: 100%;
+        margin-right: -11em;
+    }
+
+    .objectPlacement {
+        /*margin-top: -3.7em;*/
+    }
+
+        .objectPlacement input {
+            width: 80%;
+            clear: both;
+        }
+
+    .saveMarker {
+        width: 80%;
+        margin-top: 6%;
+    }
+
+    #Address {
+        width: 16.8em;
+    }
+</style>
+<div id="mydiv" class="body">
+    <h3>Populate Object and mapping with Sales Object</h3>
+    <input id="pac-input" class="controls" type="text" placeholder="Search location on map....">
+    <div id="map"></div>
+
+    <select id="MapObject"> </select>
+    <button onclick="codeAddress()" class="PopulateObject"> Map with Sales Object </button>
+    <br />
+    <p><span id="message"></span></p>
+</div>
+
+
+    @*<div id="mydiv" class="">
+            <img src="Images/ajax-loader.gif" class="ajax-loader" />
+        </div>*@
+
+    @section Scripts{
+        <script src="~/Scripts/JSController/PopulateMapObj.js"> </script>
+        <script type="text/javascript" src="~/Scripts/jquery.blockUI.js"></script>
+        @*<script async defer src="~/Scripts/API/googleMapCallbackinitAutocomplete.js"> </script>*@
+        @*<script async defer src="~/Scripts/API/googleMapLibrariesGeometry.js"> </script>*@
+        @* <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&libraries=geometry"></script>*@
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_ZldrgQ9hwk-7N5EIL9W8Drjvy5ekNZg&libraries=places&callback=initAutocomplete"
+                async defer></script>
+    }

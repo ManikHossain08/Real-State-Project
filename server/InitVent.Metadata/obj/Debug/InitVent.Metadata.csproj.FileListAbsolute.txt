@@ -1,0 +1,5 @@
+E:\Development\ITNEW\server\InitVent.Metadata\bin\Debug\Sentrana.Metadata.dll
+E:\Development\ITNEW\server\InitVent.Metadata\bin\Debug\Sentrana.Metadata.pdb
+E:\Development\ITNEW\server\InitVent.Metadata\obj\Debug\InitVent.Metadata.csprojResolveAssemblyReference.cache
+E:\Development\ITNEW\server\InitVent.Metadata\obj\Debug\Sentrana.Metadata.dll
+E:\Development\ITNEW\server\InitVent.Metadata\obj\Debug\Sentrana.Metadata.pdb

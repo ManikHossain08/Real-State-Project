@@ -1,0 +1,4 @@
+E:\Development\ITNEW\server\InitVent.NH.DataServices.SQLServer\bin\Debug\InitVent.NH.DataServices.SQLServer.dll
+E:\Development\ITNEW\server\InitVent.NH.DataServices.SQLServer\bin\Debug\InitVent.NH.DataServices.SQLServer.pdb
+E:\Development\ITNEW\server\InitVent.NH.DataServices.SQLServer\obj\Debug\InitVent.NH.DataServices.SQLServer.dll
+E:\Development\ITNEW\server\InitVent.NH.DataServices.SQLServer\obj\Debug\InitVent.NH.DataServices.SQLServer.pdb

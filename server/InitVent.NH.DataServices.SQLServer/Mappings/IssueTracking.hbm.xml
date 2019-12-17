@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="InitVent.NH.DataServices" namespace="InitVent.DataServices.Domain">
+  <class name="IssueTracking" table="IssueTrackerInfo">
+    <id name="Id" column="ID" generator="assigned" />    
+    <property name="Priority" column="issuePriority"  not-null="false" />
+    <property name="IsssueTitle" column="issueTitle"  not-null="false" />
+    <property name="IssueDescription" column="issueDescription"  not-null="false" />
+    <property name="IssueType" column="issueType" not-null="false" />
+     <property name="Severity" column="severity" not-null="false" />
+    <property name="Assignee" column="assignedPerson"  not-null="false" />   
+    <property name="IssueNo" column="issueNo" not-null="false" />
+    <property name="IssueStatus" column="issueStatus" not-null="false" /> 
+    <property name="ResolutionArea" column="resolutionArea" not-null="false" />
+    <property name="Project" column="project"  not-null="false" />
+    <property name="Creator" column="creator"  not-null="false" />
+    <property name="CreationDate" column="creationDate"  not-null="false" />
+    <property name="Modifier" column="modifier"  not-null="false" />
+    <property name="ModificationDate" column="modificationDate"  not-null="false" />
+    <property name="IssuePhoto" column="issuePhoto" length="999999" not-null="false" />    
+  </class>
+</hibernate-mapping>
+
+
+

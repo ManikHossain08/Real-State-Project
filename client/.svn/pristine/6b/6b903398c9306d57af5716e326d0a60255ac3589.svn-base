@@ -1,0 +1,275 @@
+﻿@{
+    ViewBag.Title = "Google Map Project.com";
+    //ViewBag.Title = "Mitechdev.com";
+}
+
+<style>
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+        height: 100%;
+        float: left;
+        width: 75%;
+        height: 90%;
+        position: absolute;
+        margin-left: -4em;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    /*html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }*/
+
+    .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 300px;
+    }
+
+        #pac-input:focus {
+            border-color: #4d90fe;
+        }
+
+    .pac-container {
+        font-family: Roboto;
+    }
+
+    #type-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+    }
+
+        #type-selector label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+    #target {
+        width: 345px;
+    }
+
+    #right-panel {
+        float: right;
+        width: 34%;
+        height: 100%;
+        margin-right: -11em;
+    }
+
+    .objectPlacement {
+        /*margin-top: -3.7em;*/
+    }
+
+        .objectPlacement input {
+            width: 80%;
+            clear: both;
+        }
+
+    .saveMarker {
+        width: 80%;
+        margin-top: 6%;
+    }
+
+    #Address {
+        width: 16.8em;
+    }
+
+    #mydiv {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+        background-color: grey;
+        opacity: .8;
+    }
+
+    .ajax-loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -32px; /* -1 * image width / 2 */
+        margin-top: -32px; /* -1 * image height / 2 */
+        display: block;
+    }
+
+    #right-panel {
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+    }
+
+        #right-panel select, #right-panel input {
+            font-size: 15px;
+        }
+
+        #right-panel select {
+            width: 20%;
+        }
+
+        #right-panel i {
+            font-size: 12px;
+        }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    #map {
+        height: 100%;
+        float: left;
+        width: 52.2%;
+        height: 100%;
+        position: absolute;
+        margin-left: -4em;
+        margin-top: 8em;
+    }
+
+    #right-panel {
+        float: right;
+        width: 34%;
+        height: 100%;
+    }
+
+
+
+    #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 20%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+        margin-top: 5.2em;
+        margin-left: -17.5em;
+        width: 52%;
+    }
+    .panel {
+        height: 100%;
+        overflow: auto;
+    }
+
+    #searchDataInfoTable {
+        width: 43em !important;
+        margin-top: 0;
+        margin-left: -23.5em;
+    }
+</style>
+
+<h3>Add new places (Object) by searching places from search box</h3>
+<input id="pac-input" class="controls invisible" type="text" placeholder="Search google map....">
+<div id="map"></div>
+
+<div id="right-panel">
+    <div data-ng-controller="customerController" class="container">
+    <div class="row">
+        <div class="col-md-12" id="floating-panel">
+            <strong class="error">{{ error }}</strong>
+            <label for="repeatSelect"> Sales object: </label>
+            <select id="salesobject">
+                <option ng-repeat="s in sources" value="{{s.placeId}}">{{s.Title}}</option>
+            </select>
+            <label for="travelType"> Travel Type: </label>
+            <select name="travelType" id="travelType">
+                <option value="DRIVING">DRIVING</option>
+                <option value="WALKING">WALKING</option>
+                <option value="BICYCLING">BICYCLING</option>
+            </select>
+            <label for="objectType"> Object Type: </label>
+            <select id="objectType">
+                <option value="Beach">Beach</option>
+                <option value="Shopping Center">Shopping Center</option>
+                <option value="Picnic Spot">Picnic Spot</option>
+            </select>
+            <label for="distance"> Distance: </label>
+            <input id="Distance" ng-model="Distance" placeholder="Enter distance in KM">
+            <input value="Search" ng-click="searchSalesObject()" class="btn btn-primary" style="width: 8em" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" style="width:800px" id="searchDataInfoTable">
+                    <tr>
+                        <th>#</th>
+                        <td>Source</td>
+                        <th>Destinition</th>
+                        <th>Travel Type</th>
+                            <th>Distance In KM</th>
+                            <th>Duration In Mins</th>
+                            <th>Action to Map</th>
+                        </tr>
+                        <tr data-ng-repeat="customer in customers">
+                            <td><strong data-ng-hide="customer.editMode">{{ $index + 1 }}</strong></td>
+                            <td>
+                                <p data-ng-hide="customer.editMode">{{ customer.source }}</p>
+                                <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.Name" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="customer.editMode">{{ customer.destinition }}</p>
+                                <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.Address" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="customer.editMode">{{ customer.travelType }}</p>
+                                <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.City" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="customer.editMode">{{ customer.distanceInKM }}</p>
+                                <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.Country" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="customer.editMode">{{ customer.timeInMins }}</p>
+                                <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.Age" />
+                            </td>
+                            <td>
+            <input type="submit" data-ng-click="toggleEdit(customer)" value=" routemap" id="submit" class="btn btn-primary" style="width: 6.3em">
+            @*data-ng-click="toggleEdit(customer)"*@
+                            </td>
+                        </tr>
+                    </table>
+                    <hr />
+                </div>
+            </div>
+        </div>
+        <div id="mydiv" data-ng-show="loading">
+            <img src="Images/ajax-loader.gif" class="ajax-loader" />
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+        <script src="~/Scripts/JSController/HomeIndex.js"> </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_ZldrgQ9hwk-7N5EIL9W8Drjvy5ekNZg&libraries=places&callback=initAutocomplete"
+                async defer></script>
+    }

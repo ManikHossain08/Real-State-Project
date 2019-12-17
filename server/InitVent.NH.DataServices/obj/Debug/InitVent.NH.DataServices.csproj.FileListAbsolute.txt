@@ -1,0 +1,13 @@
+E:\Development\ITNEW\server\InitVent.NH.DataServices\bin\Debug\InitVent.NH.DataServices.dll
+E:\Development\ITNEW\server\InitVent.NH.DataServices\bin\Debug\InitVent.NH.DataServices.pdb
+E:\Development\ITNEW\server\InitVent.NH.DataServices\bin\Debug\Iesi.Collections.dll
+E:\Development\ITNEW\server\InitVent.NH.DataServices\bin\Debug\InitVent.Common.dll
+E:\Development\ITNEW\server\InitVent.NH.DataServices\bin\Debug\InitVent.ORM.dll
+E:\Development\ITNEW\server\InitVent.NH.DataServices\bin\Debug\Sentrana.Metadata.dll
+E:\Development\ITNEW\server\InitVent.NH.DataServices\bin\Debug\NHibernate.dll
+E:\Development\ITNEW\server\InitVent.NH.DataServices\bin\Debug\InitVent.Common.pdb
+E:\Development\ITNEW\server\InitVent.NH.DataServices\bin\Debug\Sentrana.Metadata.pdb
+E:\Development\ITNEW\server\InitVent.NH.DataServices\bin\Debug\InitVent.ORM.pdb
+E:\Development\ITNEW\server\InitVent.NH.DataServices\obj\Debug\InitVent.NH.DataServices.csprojResolveAssemblyReference.cache
+E:\Development\ITNEW\server\InitVent.NH.DataServices\obj\Debug\InitVent.NH.DataServices.dll
+E:\Development\ITNEW\server\InitVent.NH.DataServices\obj\Debug\InitVent.NH.DataServices.pdb

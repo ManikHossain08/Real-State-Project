@@ -1,0 +1,6 @@
+E:\Development\ITNEW\server\InitVent.ORM\bin\Debug\InitVent.ORM.dll
+E:\Development\ITNEW\server\InitVent.ORM\bin\Debug\InitVent.ORM.pdb
+E:\Development\ITNEW\server\InitVent.ORM\bin\Debug\Iesi.Collections.dll
+E:\Development\ITNEW\server\InitVent.ORM\bin\Debug\NHibernate.dll
+E:\Development\ITNEW\server\InitVent.ORM\obj\Debug\InitVent.ORM.dll
+E:\Development\ITNEW\server\InitVent.ORM\obj\Debug\InitVent.ORM.pdb

@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Google Map";
+}
+<style>
+    /* Always set the map height explicitly to define the size of the div
+           * element that contains the map. */
+    #right-panel {
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+    }
+
+    #right-panel select, #right-panel input {
+            font-size: 15px;
+        }
+
+    #right-panel select {
+            width: 100%;
+        }
+
+    #right-panel i {
+            font-size: 12px;
+        }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    #map {
+        height: 100%;
+        float: left;
+        width: 63.7%;
+        height: 100%;
+        position: absolute;
+        margin-left: -4em;
+    }
+
+    #right-panel {
+        float: right;
+        width: 34%;
+        height: 100%;
+    }
+
+
+
+    #floating-panel, #waypoints-panel {
+        position: absolute;
+        top: 10px;
+        left: 20%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+        margin-top: 6.2em;
+        margin-left: -17.5em;
+    }
+
+    #waypoints-panel {
+        margin-left: 26em;
+        margin-top: 6.2em;
+        width: 13.8em;
+    }
+
+    #waypoints-panel select {
+            width: 13em;
+        }
+
+    .panel {
+        height: 100%;
+        overflow: auto;
+    }
+    #start, #end {
+        width: 8.5em;
+    }
+
+</style>
+<br><br>
+<h3>Search and  Display Object Route with Distance on  Google Maps</h3>
+<div id="waypoints-panel">
+    <b>Waypoints:</b>
+    <select multiple id="waypoints"></select>
+</div>
+<div id="floating-panel">
+    <b>Source: </b>
+    <select id="start"> </select>
+    <b>Destinition: </b>
+    <select id="end"></select>
+    <b>Travel By: </b>
+    <select id="travelBy">
+        <option value="DRIVING">DRIVING</option>
+        <option value="WALKING">WALKING</option>
+        <option value="BICYCLING">BICYCLING</option>
+        @*<option value="TRANSIT">TRANSIT</option>*@ 
+    </select>
+    <input type="submit" id="submit">
+</div>
+
+<div id="map"></div>
+<div id="right-panel">
+    <p id="distance">Total Distance: <span id="total"> 0 </span> and Total Time : <span id="totalTime"> 0</span></p>
+</div>
+
+
+@section Scripts{
+    <script src="~/Scripts/JSController/distanceRoutingMap.js"> </script>
+    @*<script async defer src="~/Scripts/API/googleMapCallbackinitMap.js"></script>*@
+    <script async defer
+              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_ZldrgQ9hwk-7N5EIL9W8Drjvy5ekNZg&callback=initMap">
+    </script>
+
+}

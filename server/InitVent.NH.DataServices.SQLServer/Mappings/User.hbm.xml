@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="InitVent.NH.DataServices" namespace="InitVent.DataServices.Domain">
+  <class name="User" table="user_info">
+    <id name="Id" column="id" generator="assigned" />
+    <property name="UserId" column="user_id" length="20" not-null="true" />
+    <property name="UserPassword" column="password" length="128" not-null="true" />
+    <property name="UserName" column="user_name" length="128" not-null="true" />
+    <property name="Status" column="status" not-null="true" />    
+    <many-to-one name="UserRole" class="Role" column="role_id" not-null="false" />
+    <property name="Mobile" column="mobile" not-null="false" />
+    <property name="Email" column="email" not-null="false" />
+    <property name="Address" column="address" not-null="false" />
+    <property name="Project_Id" column="project_id" not-null="false" />
+  </class>
+</hibernate-mapping>
+
